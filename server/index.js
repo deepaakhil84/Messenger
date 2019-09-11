@@ -8,56 +8,56 @@ var messages = [
     senderId: "1",
     receiverId: "2",
     senderName: "Deepa",
-    senderMessage: "Hello How are you"
+    message: "Hello How are you"
   },
   {
     id: "2",
     senderId: "1",
     receiverId: "2",
     senderName: "Deepa",
-    senderMessage: "Hello How are you"
+    message: "Hello How are you"
   },
   {
     id: "3",
     senderId: "1",
     receiverId: "2",
     senderName: "Deepa",
-    senderMessage: "Hello How are you"
+    message: "Hello How are you"
   },
   {
     id: "4",
     senderId: "1",
     receiverId: "2",
     senderName: "Deepa",
-    senderMessage: "Hello How are you"
+    message: "Hello How are you"
   },
   {
     id: "5",
     senderId: "1",
     receiverId: "2",
     senderName: "Deepa",
-    senderMessage: "Hello How are you"
+    message: "Hello How are you"
   },
   {
     id: "6",
     senderId: "2",
     receiverId: "1",
     senderName: "Deepa",
-    senderMessage: "Hello How are you"
+    message: "Hello How are you"
   },
   {
     id: "7",
     senderId: "2",
     receiverId: "1",
     senderName: "Deepa",
-    senderMessage: "Hello How are you"
+    message: "Hello How are you"
   },
   {
     id: "8",
     senderId: "2",
     receiverId: "1",
     senderName: "Deepa",
-    senderMessage: "Hello How are you"
+    message: "Hello How are you"
   },
 
   {
@@ -65,14 +65,14 @@ var messages = [
     senderId: "2",
     receiverId: "1",
     senderName: "Deepa",
-    senderMessage: "Hello How are you"
+    message: "Hello How are you"
   },
   {
     id: "10",
     senderId: "2",
     receiverId: "1",
     senderName: "Deepa",
-    senderMessage: "Hello How are you"
+    message: "Hello How are you"
   }
 ];
 var users = [
@@ -127,8 +127,8 @@ function startAPI() {
       return res.status(400).json({ error: "username and password is wrong" });
     }
   });
-  app.get("/id", async (req, res) => {
-    res.send();
+  app.get("/messages", async (req, res) => {
+    return res.status(200).json({ messages });
   });
   const server = app.listen(3001, () =>
     console.log(`Listening on http://localhost:${server.address().port}`)

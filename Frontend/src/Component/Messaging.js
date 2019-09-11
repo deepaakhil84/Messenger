@@ -3,7 +3,8 @@ import axios from "axios";
 class Messagin extends Component {
   state = {
     id: 1,
-    message: "hai"
+    message: "hai",
+    messages: []
   };
   handleChange = e => {
     const { name, value } = e.target;
@@ -14,11 +15,27 @@ class Messagin extends Component {
     const result = await axios.post("http://localhost:3001/message", {
       message
     });
-    console.log(result);
+    //console.log(result);
+  };
+  componentWillMount() {
+    this.getMessage();
+  }
+  getMessage = async () => {
+    const response = await axios.get("http://localhost:3001/messages");
+    const messages = response.data.messages;
+    this.setState({
+      messages
+    });
+    console.log(response);
   };
   render() {
+    const { messages } = this.state;
+
     return (
       <div className="container">
+        {messages.map(msg => {
+          return <h5>{msg.message}</h5>;
+        })}
         <form className="message-form">
           <div className="form-group">
             <label>Enter your message</label>
