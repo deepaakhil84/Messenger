@@ -5,22 +5,17 @@ import { loggedIn } from "../Auth";
 class Home extends Component {
   render() {
     if (!loggedIn()) {
-      return (
-        <div className="container">
-          <Login />
-        </div>
-      );
+      return <Login />;
     } else {
       return (
         <div className="container">
-          <h1>Welcome to my App</h1>
-          <div className="home-buttons">
-            <Link className="btn btn-primary" to="/Message">
-              Messaging
-            </Link>
-            <Link className="btn btn-primary" to="/Userform">
-              Userform
-            </Link>
+          <div className="home-container">
+            <h1>Welcome to my App</h1>
+            <div className="home-buttons">
+              <Link className="btn btn-primary" to="/Message">
+                Messaging
+              </Link>
+            </div>
           </div>
         </div>
       );

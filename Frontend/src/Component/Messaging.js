@@ -18,9 +18,10 @@ class Messagin extends Component {
   };
   render() {
     return (
-      <div className="message-container mt-10 d-flex shadow  align-items-center justify-content-center ">
-        <form className="message-form justify-content-center">
+      <div className="container">
+        <form className="message-form">
           <div className="form-group">
+            <label>Enter your message</label>
             <input
               type="text"
               name="message"

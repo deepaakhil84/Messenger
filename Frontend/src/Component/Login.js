@@ -25,17 +25,15 @@ class Login extends Component {
 
   render() {
     return (
-      <div className="login-container shadow  d-flex  align-items-center">
-        <form
-          className=" login-form  display-inline ml-auto"
-          onSubmit={this.handleSubmit}
-        >
+      <div className="container">
+        <form className="login-form" onSubmit={this.handleSubmit}>
           <div className="form-group">
-            <h1 className="mb-4 font-weight-light text-uppercase justify-content-center">
-              Log in
+            <h1 className="mb-4 font-weight-light justify-content-center">
+              Account Login
             </h1>
           </div>
           <div className="form-group">
+            <label>USERNAME</label>
             <input
               type="email"
               name="email"
@@ -46,6 +44,7 @@ class Login extends Component {
             />
           </div>
           <div className="form-group">
+            <label>PASSWORD</label>
             <input
               type="password"
               name="password"
