@@ -15,15 +15,21 @@ body {
 }
 
 .message-form {
-  width: 370px;
-  border: 1px solid rgb(136, 239, 247);
-  border-radius: 5px;
-  background-color: white;
-  padding: 50px;
-  margin: auto;
-  margin-top: 10%;
+  display: flex;
+  justify-content: space-around;
 }
-
+.messaging-input {
+  width: 80%;
+}
+.messaging-submitbutton {
+  width: 15%;
+}
+.display-message {
+  width: 50%;
+  margin: 10px;
+  background-color: #e7fccc;
+  border-radius: 5px;
+}
 .registration-form {
   border: 1px solid rgb(136, 239, 247);
   border-radius: 5px;
@@ -43,9 +49,26 @@ body {
   background-color: white;
 }
 .home-buttons {
-  margin-top:30px;
+  margin-top: 30px;
   display: flex;
   justify-content: space-around;
+}
+.messages-sidebar {
+  width: 30%;
+}
+.main-messagebar {
+  width: 70%;
+}
+.test {
+  margin-top: 10px;
+
+  width: 100%;
+}
+.messages-container {
+  background-color: white;
+  margin-top: 25px;
+  display: flex;
+  flex-wrap: wrap;
 }
 @keyframes App-logo-spin {
   from {
