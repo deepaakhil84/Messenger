@@ -42,21 +42,21 @@ var messages = [
     id: "6",
     senderId: "2",
     receiverId: "1",
-    senderName: "Deepa",
+    senderName: "Mosen",
     message: "Hello How are you"
   },
   {
     id: "7",
     senderId: "2",
     receiverId: "1",
-    senderName: "Deepa",
+    senderName: "Mosen",
     message: "Hello How are you"
   },
   {
     id: "8",
     senderId: "2",
     receiverId: "1",
-    senderName: "Deepa",
+    senderName: "Mosen",
     message: "Hello How are you"
   },
 
@@ -64,14 +64,14 @@ var messages = [
     id: "9",
     senderId: "2",
     receiverId: "1",
-    senderName: "Deepa",
+    senderName: "Mosen",
     message: "Hello How are you"
   },
   {
     id: "10",
     senderId: "2",
     receiverId: "1",
-    senderName: "Deepa",
+    senderName: "Mosen",
     message: "Hello How are you"
   }
 ];
@@ -85,8 +85,8 @@ var users = [
   },
   {
     _id: "2",
-    firstName: "devna",
-    lastName: "akhil",
+    firstName: "mosen",
+    lastName: "cyf",
     email: "devnaakhiluk@gmail.com",
     password: "12345"
   }
@@ -129,6 +129,9 @@ function startAPI() {
   });
   app.get("/messages", async (req, res) => {
     return res.status(200).json({ messages });
+  });
+  app.get("/users", async (req, res) => {
+    return res.status(200).json({ users });
   });
   const server = app.listen(3001, () =>
     console.log(`Listening on http://localhost:${server.address().port}`)

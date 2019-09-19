@@ -6,7 +6,8 @@ class Userform extends Component {
     firstName: "",
     lastName: "",
     email: "",
-    password: ""
+    password: "",
+    msg: ""
   };
   handleChange = e => {
     const { name, value } = e.target;
@@ -20,10 +21,27 @@ class Userform extends Component {
       lastName,
       email
     });
+    if (result.status === 200) {
+      this.setState({
+        firstName: "",
+        lastName: "",
+        email: "",
+        password: "",
+        msg: "You are successfully registered"
+      });
+    }
     console.log(result);
   };
 
   render() {
+    const { msg } = this.state;
+    if (msg) {
+      return (
+        <div className="container">
+          <h4>{msg}</h4>
+        </div>
+      );
+    }
     return (
       <div className="container">
         <form className="registration-form" onSubmit={this.handleSubmit}>
