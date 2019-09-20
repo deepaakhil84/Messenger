@@ -21,7 +21,12 @@ class Messagin extends Component {
     const result = await axios.post("http://localhost:3001/message", {
       message
     });
-    //console.log(result);
+
+    const messages = result.data.messages; //displayed updated message(included the text posted)
+    this.setState({
+      message: "", //clear the text box after submit a message
+      messages
+    });
   };
   componentWillMount() {
     this.getMessage();
@@ -49,23 +54,22 @@ class Messagin extends Component {
 
     return (
       <div className="container ">
-      <div className="messages-container">
-        <div className="test">
-          <Profilebar />
+        <div className="messages-container">
+          <div className="test">
+            <Profilebar />
+          </div>
+          <div className="messages-sidebar ">
+            <Friends users={users} />
+          </div>
+          <div className="main-messagebar  ">
+            <Messages messages={messages} />
+            <Form
+              handleChange={this.handleChange}
+              handleSubmit={this.handleSubmit}
+              message={message}
+            />
+          </div>
         </div>
-        <div className="messages-sidebar ">
-          <Friends users={users} />
-        </div>
-        <div className="main-messagebar  ">
-          
-         <Messages messages={messages} />
-          <Form
-            handleChange={this.handleChange}
-            handleSubmit={this.handleSubmit}
-            message={message}
-          />
-        </div>
-      </div>
       </div>
     );
   }

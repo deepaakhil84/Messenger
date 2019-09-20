@@ -6,7 +6,9 @@ export default class Messages extends Component {
       this.scrollToBottom();
     }, 1000);
   }
-
+  componentDidUpdate() {
+    this.scrollToBottom();
+  }
   scrollToBottom = () => {
     const { messageList } = this.refs;
     const { scrollHeight } = messageList;
