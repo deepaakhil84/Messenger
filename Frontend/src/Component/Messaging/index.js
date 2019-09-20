@@ -8,7 +8,7 @@ import Friends from "./Friends";
 class Messagin extends Component {
   state = {
     id: 1,
-    message: "hai",
+    message: "",
     messages: [],
     users: []
   };
@@ -48,21 +48,24 @@ class Messagin extends Component {
     const { messages, users, message } = this.state;
 
     return (
-      <div className="messages-container container shadow p-3 mb-5 bg-white rounded">
+      <div className="container ">
+      <div className="messages-container">
         <div className="test">
           <Profilebar />
         </div>
-        <div className="messages-sidebar shadow p-3 mb-5 bg-white rounded">
+        <div className="messages-sidebar ">
           <Friends users={users} />
         </div>
-        <div className="main-messagebar shadow p-3 mb-5 bg-white rounded  ">
-          <Messages messages={messages} />
+        <div className="main-messagebar  ">
+          
+         <Messages messages={messages} />
           <Form
             handleChange={this.handleChange}
             handleSubmit={this.handleSubmit}
             message={message}
           />
         </div>
+      </div>
       </div>
     );
   }

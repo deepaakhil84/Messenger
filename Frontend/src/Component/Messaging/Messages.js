@@ -1,9 +1,25 @@
 import React, { Component } from "react";
-
+import ReactDOM from "react-dom";
 export default class Messages extends Component {
+  componentDidMount() {
+    setTimeout(() => {
+      this.scrollToBottom();
+    }, 1000);
+  }
+
+  scrollToBottom = () => {
+    const { messageList } = this.refs;
+    const { scrollHeight } = messageList;
+    const height = messageList.clientHeight;
+    const maxScrollTop = scrollHeight - height;
+    // eslint-disable-next-line react/no-find-dom-node
+    ReactDOM.findDOMNode(messageList).scrollTop =
+      maxScrollTop > 0 ? maxScrollTop : 0;
+  };
+
   render() {
     return (
-      <div className="container  message-container">
+      <div ref="messageList" className="container  message-container">
         {this.props.messages.map(msg => {
           return (
             <div className=" message-bar  display-message p-2  ">
