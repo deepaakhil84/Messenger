@@ -1,8 +1,3 @@
-body {
-  background-color: beige;
-  width: 100%;
-  height: 100%;
-}
 
 .login-form {
   background-color: white;
@@ -59,20 +54,26 @@ body {
 }
 .messages-sidebar {
   width: 30%;
+  border: 1px solid rgb(136, 239, 247);
+  padding: 10px;
 }
 .main-messagebar {
   width: 70%;
+  border: 1px solid rgb(136, 239, 247);
 }
 .test {
-  margin-top: 10px;
-
   width: 100%;
+  height: 60px;
+  border: 1px solid rgb(136, 239, 247);
+  padding: 10px;
 }
 .messages-container {
   background-color: white;
   margin-top: 25px;
   display: flex;
   flex-wrap: wrap;
+  border: 4px solid rgb(136, 239, 247);
+
 }
 @keyframes App-logo-spin {
   from {
