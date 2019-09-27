@@ -3,6 +3,7 @@ import express from "express";
 import cors from "cors";
 import compression from "compression";
 import jwt from "jsonwebtoken";
+
 var messages = [
   {
     id: "1",
@@ -125,7 +126,7 @@ function startAPI() {
     if (LookupUser.length > 0) {
       //to do create token out of LookupUser[0]
 
-      jwt.sign({ users }, "secretkey", (err, token) => {
+      jwt.sign(LookupUser[0], "secretkey", (err, token) => {
         if (err) {
           return res.status(401).send("invalid token...");
         }
