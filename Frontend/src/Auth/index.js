@@ -1,10 +1,11 @@
-export const login = () => {
-  localStorage.setItem("loggedin", "yes");
+export const login = token => {
+  localStorage.setItem("token", token);
   window.location.reload();
 };
+
 export const loggedIn = () => {
-  const loggedin = localStorage.getItem("loggedin");
-  if (loggedin === "yes") {
+  const token = localStorage.getItem("token");
+  if (token) {
     return true;
   } else {
     return false;

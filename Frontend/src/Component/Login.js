@@ -17,9 +17,9 @@ class Login extends Component {
       email,
       password
     });
-
+    console.log(result);
     if (result.status === 200) {
-      login();
+      login(result.data.token);
     }
   };
 

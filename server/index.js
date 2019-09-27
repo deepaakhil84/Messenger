@@ -2,6 +2,7 @@ import * as dotenv from "dotenv";
 import express from "express";
 import cors from "cors";
 import compression from "compression";
+import jwt from "jsonwebtoken";
 var messages = [
   {
     id: "1",
@@ -122,7 +123,14 @@ function startAPI() {
         user.password === userLoginDetails.password
     );
     if (LookupUser.length > 0) {
-      return res.status(200).json({ user: LookupUser[0] });
+      //to do create token out of LookupUser[0]
+
+      jwt.sign({ users }, "secretkey", (err, token) => {
+        if (err) {
+          return res.status(401).send("invalid token...");
+        }
+        return res.status(200).json({ token });
+      });
     } else {
       return res.status(400).json({ error: "username and password is wrong" });
     }
