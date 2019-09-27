@@ -125,7 +125,7 @@ function startAPI() {
     if (LookupUser.length > 0) {
       //to do create token out of LookupUser[0]
 
-      jwt.sign({ users }, "secretkey", (err, token) => {
+      jwt.sign(LookupUser[0], "secretkey", (err, token) => {
         if (err) {
           return res.status(401).send("invalid token...");
         }

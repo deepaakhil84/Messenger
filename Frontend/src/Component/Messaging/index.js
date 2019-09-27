@@ -4,13 +4,15 @@ import Form from "./Form";
 import Messages from "./Messages";
 import Profilebar from "./Profilebar";
 import Friends from "./Friends";
+import { getProfile } from "../../Auth";
 
 class Messagin extends Component {
   state = {
     id: 1,
     message: "",
     messages: [],
-    users: []
+    users: [],
+    user: {}
   };
   handleChange = e => {
     const { name, value } = e.target;
@@ -31,6 +33,14 @@ class Messagin extends Component {
   componentWillMount() {
     this.getMessage();
     this.getUsers();
+    /* To get the user from the decoded function create import function getProfile()
+    create an object (user)
+    intialize the value inside the user.
+    Send it as props to another component(profilebar)
+ */
+    this.setState({
+      user: getProfile() //
+    });
   }
 
   getUsers = async () => {
@@ -50,13 +60,15 @@ class Messagin extends Component {
   };
 
   render() {
-    const { messages, users, message } = this.state;
+    const { messages, users, message, user } = this.state;
+    console.log(user);
 
     return (
       <div className="container ">
         <div className="messages-container">
           <div className="test">
-            <Profilebar />
+            {/* send decoded user as props to profilebar */}
+            <Profilebar user={user} />
           </div>
           <div className="messages-sidebar ">
             <Friends users={users} />
