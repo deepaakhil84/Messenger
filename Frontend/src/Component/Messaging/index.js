@@ -56,12 +56,10 @@ class Messagin extends Component {
     this.setState({
       messages
     });
-    console.log(response);
   };
 
   render() {
     const { messages, users, message, user } = this.state;
-    console.log(user);
 
     return (
       <div className="container ">

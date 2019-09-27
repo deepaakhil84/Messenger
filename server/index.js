@@ -3,6 +3,7 @@ import express from "express";
 import cors from "cors";
 import compression from "compression";
 import jwt from "jsonwebtoken";
+
 var messages = [
   {
     id: "1",
