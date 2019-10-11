@@ -176,12 +176,24 @@ function startAPI() {
       return user;
     });
     users = newUsers;
+    return res.status(200).json("sucess");
   });
 
-  app.get("/messages", async (req, res) => {
+  app.get("/messages/:senderId/:receiverId", async (req, res) => {
     //to do get messages belong to two users sender, rsiver
-
-    return res.status(200).json({ messages });
+    const { senderId, receiverId } = req.params;
+    console.log(senderId, receiverId);
+    const firstFilteredMsgs = messages.filter(
+      message =>
+        message.senderId === senderId && message.receiverId === receiverId
+    );
+    const secondFilteredMsgs = messages.filter(
+      message =>
+      message.receiverId === senderId && message.senderId === receiverId
+      );
+    return res
+      .status(200)
+      .json({ messages: [...firstFilteredMsgs, ...secondFilteredMsgs] }); //flat the result
   });
 
   app.get("/users", async (req, res) => {
