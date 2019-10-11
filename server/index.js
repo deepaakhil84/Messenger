@@ -75,8 +75,23 @@ var messages = [
     receiverId: "1",
     senderName: "Mosen",
     message: "Hello How are you"
+  },
+  {
+    id: "11",
+    senderId: "3",
+    receiverId: "1",
+    senderName: "Nima",
+    message: "Hello How are you"
+  },
+  {
+    id: "12",
+    senderId: "3",
+    receiverId: "1",
+    senderName: "nima",
+    message: "Hello How are you"
   }
 ];
+
 var users = [
   {
     _id: "1",
@@ -90,6 +105,13 @@ var users = [
     firstName: "mosen",
     lastName: "cyf",
     email: "devnaakhiluk@gmail.com",
+    password: "12345"
+  },
+  {
+    _id: "3",
+    firstName: "nima",
+    lastName: "cyf",
+    email: "nima@gmail.com",
     password: "12345"
   }
 ];
@@ -136,9 +158,32 @@ function startAPI() {
       return res.status(400).json({ error: "username and password is wrong" });
     }
   });
+  // To update a user
+  app.put("/user/:_id", async (req, res) => {
+    const userData = req.body;
+    console.log(userData);
+    const { _id } = req.params;
+    const newUsers = users.map(user => {
+      if (_id === user._id) {
+        return {
+          _id: user._id,
+          firstName: userData.firstName,
+          lastName: userData.lastName,
+          email: userData.email,
+          password: userData.password
+        };
+      }
+      return user;
+    });
+    users = newUsers;
+  });
+
   app.get("/messages", async (req, res) => {
+    //to do get messages belong to two users sender, rsiver
+
     return res.status(200).json({ messages });
   });
+
   app.get("/users", async (req, res) => {
     return res.status(200).json({ users });
   });

@@ -4,7 +4,7 @@ import Form from "./Form";
 import Messages from "./Messages";
 import Profilebar from "./Profilebar";
 import Friends from "./Friends";
-import { getProfile } from "../../Auth";
+import { getProfile, loggedIn } from "../../Auth";
 
 class Messagin extends Component {
   state = {
@@ -31,7 +31,6 @@ class Messagin extends Component {
     });
   };
   componentWillMount() {
-    this.getMessage();
     this.getUsers();
     /* To get the user from the decoded function create import function getProfile()
     create an object (user)
@@ -54,8 +53,15 @@ class Messagin extends Component {
     const response = await axios.get("http://localhost:3001/messages");
     const messages = response.data.messages;
     this.setState({
+      //google axious get request with id
+
       messages
     });
+  };
+  //to do creat fumction
+  displayMessage = receiverId => {
+    console.log(receiverId);
+    this.getMessage();
   };
 
   render() {
@@ -66,18 +72,26 @@ class Messagin extends Component {
         <div className="messages-container">
           <div className="test">
             {/* send decoded user as props to profilebar */}
-            <Profilebar user={user} />
+            {user && <Profilebar user={user} />}
           </div>
-          <div className="messages-sidebar ">
-            <Friends users={users} />
+          <div className="messages-sidebar">
+            {loggedIn() && (
+              <Friends
+                users={users}
+                user={user}
+                displayMessage={this.displayMessage}
+              />
+            )}
           </div>
           <div className="main-messagebar  ">
             <Messages messages={messages} />
-            <Form
-              handleChange={this.handleChange}
-              handleSubmit={this.handleSubmit}
-              message={message}
-            />
+            {loggedIn() && (
+              <Form
+                handleChange={this.handleChange}
+                handleSubmit={this.handleSubmit}
+                message={message}
+              />
+            )}
           </div>
         </div>
       </div>
