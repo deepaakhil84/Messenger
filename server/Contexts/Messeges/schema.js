@@ -4,7 +4,7 @@ import { Schema, model } from 'mongoose'
   {
 
    senderId: String,
-    ReciverId: String,
+    reciverId: String,
     senderName:String,
     message:String
 },
