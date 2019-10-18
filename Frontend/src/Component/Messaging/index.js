@@ -12,16 +12,21 @@ class Messagin extends Component {
     message: "",
     messages: [],
     users: [],
-    user: {}
+    user: {},
+    receiverId: "",
+    senderId: ""
   };
   handleChange = e => {
     const { name, value } = e.target;
     this.setState({ [name]: value });
   };
   handleSubmit = async () => {
-    const { message } = this.state;
+    const { message, senderId, receiverId, user } = this.state;
     const result = await axios.post("http://localhost:3001/message", {
-      message
+      message,
+      senderId,
+      receiverId,
+      senderName: user.firstName
     });
 
     const messages = result.data.messages; //displayed updated message(included the text posted)
@@ -49,19 +54,21 @@ class Messagin extends Component {
       users
     });
   };
-  getMessage = async () => {
-    const response = await axios.get("http://localhost:3001/messages");
+
+  //to do creat fumction
+  displayMessage = async (receiverId, senderId) => {
+    this.setState({
+      receiverId,
+      senderId
+    });
+    const response = await axios.get(
+      `http://localhost:3001/messages/${senderId}/${receiverId}`
+    );
     const messages = response.data.messages;
     this.setState({
       //google axious get request with id
-
       messages
     });
-  };
-  //to do creat fumction
-  displayMessage = receiverId => {
-    console.log(receiverId);
-    this.getMessage();
   };
 
   render() {

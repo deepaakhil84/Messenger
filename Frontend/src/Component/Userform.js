@@ -15,11 +15,12 @@ class Userform extends Component {
   };
   handleSubmit = async e => {
     e.preventDefault();
-    const { firstName, lastName, email } = this.state;
+    const { firstName, lastName, email, password } = this.state;
     const result = await axios.post("http://localhost:3001/user", {
       firstName,
       lastName,
-      email
+      email,
+      password
     });
     if (result.status === 200) {
       this.setState({

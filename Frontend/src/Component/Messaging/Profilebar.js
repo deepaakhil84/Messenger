@@ -34,6 +34,7 @@ export default class ProfileBar extends Component {
       email,
       password
     });
+    console.log(result);
     if (result.status === 200) {
       this.setState({
         msg: "Your details are successfully updated"
@@ -48,20 +49,14 @@ export default class ProfileBar extends Component {
   };
   render() {
     const { msg } = this.state;
-    if (msg) {
-      return (
-        <div className="container">
-          <h4>{msg}</h4>
-        </div>
-      );
-    }
 
     const { user } = this.props;
-    console.log(user);
     return (
       <div>
         {/* received and displayed from decoded user */}
         <span onClick={this.handleClick}>{user.firstName}</span>
+        <h4>{msg}</h4>
+
         {/* To do - show your profile click on your name - edit profile should be available. */}
         {this.state.showProfile && (
           <form onSubmit={this.handleSubmit}>
@@ -107,7 +102,7 @@ export default class ProfileBar extends Component {
                 type="submit"
                 class="btn btn-success"
               >
-                Update{" "}
+                Update
               </button>
             </div>
           </form>
