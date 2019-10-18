@@ -6,10 +6,7 @@ const mongooseOptions = {
 };
 export default async function connectToDb() {
   try {
-    await mongoose.connect(
-      "mongodb+srv://chat-app:1234@chat-app-q3o15.mongodb.net/chatApp",
-      mongooseOptions
-    );
+    await mongoose.connect(process.env.DB_STRING_URL, mongooseOptions);
     console.log("connect to the database");
   } catch (error) {
     console.log(error);
