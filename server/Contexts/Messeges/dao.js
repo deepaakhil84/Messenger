@@ -1,13 +1,11 @@
-import Dao from "../../DB/dao"
-import messages from './schema'
-​
-export default class messages extends Dao {
+import Dao from "../../DB/dao";
+import messages from "./schema";
+export default class messagesDao extends Dao {
   constructor() {
-    super(messages)
+    super(messages);
   }
-​
-  async create(userDetails) {
-    const message = new messages(userDetails)
-    return message.save()
+  async create(messageDetails) {
+    const message = new messages(messageDetails);
+    return message.save();
   }
 }

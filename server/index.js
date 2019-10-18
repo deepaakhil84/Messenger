@@ -5,6 +5,7 @@ import compression from "compression";
 import jwt from "jsonwebtoken";
 import connectToDb from "./DB/index";
 import UserContext from "./Contexts/Users";
+import MessageContext from "./Contexts/Messeges";
 
 connectToDb();
 dotenv.config();
@@ -16,11 +17,14 @@ function startAPI() {
     .use(compression());
 
   app.post("/message", async (req, res) => {
-    const message = req.body;
-    message.id = messages.length + 1;
-    console.log(message);
-    messages.push(message);
-    return res.status(200).json({ messages });
+    try {
+      const message = await MessageContext.findOrCreateMessage(req.body);
+
+      return res.status(200).json({ message });
+    } catch (error) {
+      console.log({ ...error });
+      return res.status(400).json({ error: "could not send message" });
+    }
   });
 
   app.post("/user", async (req, res) => {
@@ -32,6 +36,7 @@ function startAPI() {
       return res.status(400).json({ error: "could not  create user" });
     }
   });
+
   app.post("/login", async (req, res) => {
     const userLoginDetails = req.body;
     try {
@@ -54,35 +59,43 @@ function startAPI() {
         throw new Error("no user");
       }
     } catch (error) {
-      console.log(error );
+      console.log(error);
       return res.status(400).json({ error: "username and password is wrong" });
     }
   });
+
   // To update a user
+
   app.put("/user/:_id", async (req, res) => {
     const userData = req.body;
+
     console.log(userData);
     const { _id } = req.params;
-    const newUsers = users.map(user => {
-      if (_id === user._id) {
-        return {
-          _id: user._id,
-          firstName: userData.firstName,
-          lastName: userData.lastName,
-          email: userData.email,
-          password: userData.password
-        };
-      }
-      return user;
-    });
-    users = newUsers;
-    return res.status(200).json("sucess");
+    try {
+      const userData = await UserContext.findById(userData);
+      const newUsers = users.map(user => {
+        if (_id === user._id) {
+          return {
+            _id: user._id,
+            firstName: userData.firstName,
+            lastName: userData.lastName,
+            email: userData.email,
+            password: userData.password
+          };
+        }
+        return user;
+      });
+    } catch (error) {
+      users = newUsers;
+      return res.status(200).json("sucess");
+    }
   });
 
   app.get("/messages/:senderId/:receiverId", async (req, res) => {
     //to do get messages belong to two users sender, rsiver
     const { senderId, receiverId } = req.params;
     console.log(senderId, receiverId);
+
     const firstFilteredMsgs = messages.filter(
       message =>
         message.senderId === senderId && message.receiverId === receiverId
@@ -97,7 +110,13 @@ function startAPI() {
   });
 
   app.get("/users", async (req, res) => {
-    return res.status(200).json("lll");
+    try {
+      const users = await UserContext.findAll();
+      console.log(users);
+      return res.status(200).json({users});
+    } catch (error) {
+      console.log("error");
+    }
   });
   const server = app.listen(3001, () =>
     console.log(`Listening on http://localhost:${server.address().port}`)
